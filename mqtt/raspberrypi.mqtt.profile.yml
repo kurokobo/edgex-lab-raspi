@@ -1,0 +1,63 @@
+# mqtt.test.device.profile.yml
+name: "RaspberryPi.MQTT.Profile"
+manufacturer: "iot"
+model: "Raspberry Pi"
+description: "Raspberry Pi"
+labels:
+  - "mqtt"
+  - "raspi"
+deviceResources:
+  -
+    name: temperature
+    description: "device temperature value"
+    properties:
+      value:
+        { type: "Float64", size: "4", readWrite: "R", floatEncoding: "eNotation"  }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }
+  -
+    name: humidity
+    description: "device humidity value"
+    properties:
+      value:
+        { type: "Float64", size: "4", readWrite: "R", floatEncoding: "eNotation"  }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }
+
+deviceCommands:
+  -
+    name: temperature
+    get:
+    - { index: "1", operation: "get", object: "temperature", parameter: "temperature" }
+  -
+    name: humidity
+    get:
+    - { index: "1", operation: "get", object: "humidity", parameter: "humidity" }
+
+coreCommands:
+  -
+    name: temperature
+    get:
+      path: "/api/v1/device/{deviceId}/temperature"
+      responses:
+      -
+        code: "200"
+        description: "get the temperature value"
+        expectedValues: ["temperature"]
+      -
+        code: "503"
+        description: "service unavailable"
+        expectedValues: []
+  -
+    name: humidity
+    get:
+      path: "/api/v1/device/{deviceId}/humidity"
+      responses:
+      -
+        code: "200"
+        description: "get the humidity value"
+        expectedValues: ["humidity"]
+      -
+        code: "503"
+        description: "service unavailable"
+        expectedValues: []
