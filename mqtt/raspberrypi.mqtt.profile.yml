@@ -23,6 +23,22 @@ deviceResources:
         { type: "Float64", size: "4", readWrite: "R", floatEncoding: "eNotation"  }
       units:
         { type: "String", readWrite: "R", defaultValue: "" }
+  -
+    name: airpressure
+    description: "device air pressure value"
+    properties:
+      value:
+        { type: "Float64", size: "4", readWrite: "R", floatEncoding: "eNotation"  }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }
+  -
+    name: co2concentration
+    description: "device co2 concentration value"
+    properties:
+      value:
+        { type: "Float64", size: "4", readWrite: "R", floatEncoding: "eNotation"  }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }
 
 deviceCommands:
   -
@@ -33,6 +49,14 @@ deviceCommands:
     name: humidity
     get:
     - { index: "1", operation: "get", object: "humidity", parameter: "humidity" }
+  -
+    name: airpressure
+    get:
+    - { index: "1", operation: "get", object: "airpressure", parameter: "airpressure" }
+  -
+    name: co2concentration
+    get:
+    - { index: "1", operation: "get", object: "co2concentration", parameter: "co2concentration" }
 
 coreCommands:
   -
@@ -57,6 +81,32 @@ coreCommands:
         code: "200"
         description: "get the humidity value"
         expectedValues: ["humidity"]
+      -
+        code: "503"
+        description: "service unavailable"
+        expectedValues: []
+  -
+    name: airpressure
+    get:
+      path: "/api/v1/device/{deviceId}/airpressure"
+      responses:
+      -
+        code: "200"
+        description: "get the air pressure value"
+        expectedValues: ["airpressure"]
+      -
+        code: "503"
+        description: "service unavailable"
+        expectedValues: []
+  -
+    name: co2concentration
+    get:
+      path: "/api/v1/device/{deviceId}/co2concentration"
+      responses:
+      -
+        code: "200"
+        description: "get the co2 concentration value"
+        expectedValues: ["co2concentration"]
       -
         code: "503"
         description: "service unavailable"
