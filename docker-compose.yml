@@ -270,6 +270,7 @@ services:
       edgex_profile: mqtt-export
       Service_Host: edgex-app-service-configurable-mqtt-export
       MessageBus_SubscribeHost_Host: edgex-core-data
+      Writable_Pipeline_Functions_MQTTSend_Parameters_autoreconnect: "true"
       Writable_Pipeline_Functions_MQTTSend_Addressable_Address: ${MQTT_BROKER}
       Writable_Pipeline_Functions_MQTTSend_Addressable_Port: 1883
       Writable_Pipeline_Functions_MQTTSend_Addressable_Protocol: tcp
@@ -280,6 +281,7 @@ services:
       - consul
       - logging
       - data
+    restart: always
 
   rulesengine:
     image: edgexfoundry/docker-support-rulesengine:1.1.0
